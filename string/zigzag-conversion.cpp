@@ -1,6 +1,7 @@
 class Solution {
 public:
     string convert(string s, int numRows) {
+        if(numRows==1) return s; 
         vector<vector<char>> v(numRows,vector<char> (1000,'-'));
         int idx=0,i=0,j=0;
         bool diagonal=0;
