@@ -21,7 +21,7 @@ public:
         }
         double target=total_area/2;
         double low=0,high=2e9;
-        for (int i = 0; i < 49; i++) {
+        while(high-low>1e-5) {
             double mid = (low + high) / 2.0;
             double abv_area = calculateAreaAbove(squares, mid);
 
