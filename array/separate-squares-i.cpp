@@ -2,18 +2,14 @@ class Solution {
 public:
     long double calculateAreaAbove(vector<vector<int>> &sq,double &y){
         long double area=0;
-        for(auto square:sq){
-            int xc=square[0];
-            int yc=square[1];
-            int len=square[2];
-            if( yc + len <= y) continue;
-            
-            if(yc<= y && y< yc+len ){
-                area+= (len)*(yc+len-y);
-            }
-            else{
-                area+=((long double)len*len);
-            }
+        for (auto &square : sq) {
+            long double yc = square[1];
+            long double len = square[2];
+            long double top = yc + len;
+
+            if (top <= y) continue;             
+            if (yc >= y) area += len * len;     
+            else area += len * (top - y);       
         }
         return area;
     }
