@@ -2,7 +2,7 @@ class Solution {
 public:
     string convert(string s, int numRows) {
         if(numRows==1) return s; 
-        vector<vector<char>> v(numRows,vector<char> (1000,'-'));
+        vector<vector<char>> v(numRows,vector<char> (s.size(),'-'));
         int idx=0,i=0,j=0;
         bool diagonal=0;
         while(idx<s.size()){
