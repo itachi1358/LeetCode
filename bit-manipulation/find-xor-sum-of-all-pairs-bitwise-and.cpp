@@ -22,7 +22,7 @@ public:
                 }
             }
 
-            long long x=n_set*m_set;
+            long long x=(long long)n_set*m_set;
             if(x%2==1){
                 xor_v[i]=1;
             }
