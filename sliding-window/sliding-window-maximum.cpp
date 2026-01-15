@@ -25,13 +25,25 @@ public:
         vector<int> ans;
         int n=nums.size();
         int l=0,r=k-1;
-        vector<int> seg(4*n,0);
-        build_tree(0,0,n-1,seg,nums);
+        multiset<int> mst;
+        for(int i=l;i<=r;i++){
+            mst.insert(nums[i]);
+        }
         while(r<n){
-            int a=getMax(0,0,n-1,l,r,seg);
+            auto it_max=mst.rbegin();
+            int a=*it_max;
             ans.push_back(a);
-            l++;
+            
             r++;
+            if(r<n){
+                mst.insert(nums[r]);
+            }
+
+            auto it=mst.find(nums[l]);
+            if(it!=mst.end()) mst.erase(it);
+            l++;
+
+           
         }
         return ans;
     }
