@@ -1,34 +1,38 @@
 class Solution {
 public:
     int getXORSum(vector<int>& arr1, vector<int>& arr2) {
-        int ans = 0;
+        int a=arr1[0];
+        int n=arr1.size();
+        int m=arr2.size();
+        for(auto num:arr1) a=a^num;
+        for(auto num:arr2) a=a^num;
+
+        vector<int> xor_v(31,0);
         
-        // Iterate through all 31 possible bit positions
-        for(int i = 0; i < 31; i++){
-            long long count1 = 0;
-            long long count2 = 0;
-
-            // Count how many numbers in arr1 have the i-th bit set
-            for(auto num : arr1){
-                if((num >> i) & 1){ 
-                    count1++;
+        for(int i=30;i>=0;i--){
+            int n_set=0,m_set=0;
+            for(auto num:arr1){
+                if( (num & (1<<i)) != 0){
+                    n_set++;
+                }
+            }
+            for(auto num:arr2){
+                if( (num&(1<<i)) !=0 ){
+                    m_set++;
                 }
             }
 
-            // Count how many numbers in arr2 have the i-th bit set
-            for(auto num : arr2){
-                if((num >> i) & 1){
-                    count2++;
-                }
-            }
-
-            // Total pairs contributing a '1' at this bit position
-            long long pairs = count1 * count2;
-            if(pairs % 2 == 1){
-                ans |= (1 << i);
+            long long x=n_set*m_set;
+            if(x%2==1){
+                xor_v[i]=1;
             }
         }
-        
+         int ans=0;
+        for(int i=30;i>=0;i--){
+            if(xor_v[i]==1){
+                ans|=(1<<i);
+            }
+        }  
         return ans;
     }
 };
