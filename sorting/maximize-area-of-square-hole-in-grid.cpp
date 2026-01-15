@@ -19,8 +19,7 @@ public:
 
         for(int j=1;j<vBars.size();j++){
             if(vBars[j]==vBars[j-1]+1){
-                b++;
-               
+                b++;  
             }
             else{
                 b=1;
