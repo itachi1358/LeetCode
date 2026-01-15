@@ -24,26 +24,20 @@ public:
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
         vector<int> ans;
         int n=nums.size();
-        int l=0,r=k-1;
-        multiset<int> mst;
-        for(int i=l;i<=r;i++){
-            mst.insert(nums[i]);
-        }
-        while(r<n){
-            auto it_max=mst.rbegin();
-            int a=*it_max;
-            ans.push_back(a);
-            
-            r++;
-            if(r<n){
-                mst.insert(nums[r]);
+        deque<int> dq;
+        for(int i=0;i<n;i++){
+
+            while(!dq.empty() && dq.front()<=i-k){
+                dq.pop_front();
             }
 
-            auto it=mst.find(nums[l]);
-            if(it!=mst.end()) mst.erase(it);
-            l++;
+            while(!dq.empty() && nums[dq.back()]<nums[i]){
+                dq.pop_back();
+            }
 
-           
+            dq.push_back(i);
+
+            if(i>=k-1) ans.push_back(nums[dq.front()]);
         }
         return ans;
     }
