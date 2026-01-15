@@ -1,28 +1,35 @@
 class Solution {
 public:
-    // Helper to find the maximum consecutive sequence length in a sorted vector
-    int getMaxConsecutive(vector<int>& bars) {
-        sort(bars.begin(), bars.end());
-        int max_consecutive = 1;
-        int current_consecutive = 1;
-        
-        for (int i = 1; i < bars.size(); ++i) {
-            if (bars[i] == bars[i - 1] + 1) {
-                current_consecutive++;
-            } else {
-                current_consecutive = 1;
+    int maximizeSquareHoleArea(int n, int m, vector<int>& hBars, vector<int>& vBars) {
+
+        sort(hBars.begin(),hBars.end());
+         sort(vBars.begin(),vBars.end());
+         long long area=0;
+         long long len=1,bth=1;
+         long long l=1,b=1;
+        for(int i=1;i<hBars.size();i++){
+            if(hBars[i]==hBars[i-1]+1){
+                l++;
             }
-            max_consecutive = max(max_consecutive, current_consecutive);
+            else{
+                l=1;
+            }
+            len=max(len,l);
         }
-        return max_consecutive;
+
+        for(int j=1;j<vBars.size();j++){
+            if(vBars[j]==vBars[j-1]+1){
+                b++;
+               
+            }
+            else{
+                b=1;
+            }
+            bth=max(bth,b);
+        }
+        int sid=min(len,bth)+1;
+        area=sid*sid;
+        return area;
     }
 
-    int maximizeSquareHoleArea(int n, int m, vector<int>& hBars, vector<int>& vBars) {
-        // Gap size = number of consecutive bars + 1
-        int maxH = getMaxConsecutive(hBars) + 1;
-        int maxV = getMaxConsecutive(vBars) + 1;
-        
-        int side = min(maxH, maxV);
-        return side * side;
-    }
 };
