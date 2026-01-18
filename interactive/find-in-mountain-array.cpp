@@ -34,6 +34,7 @@ public:
     int findInMountainArray(int target, MountainArray &mountainArr) {
         int s=0;
         int e=mid_finder(mountainArr);
+        int peak=e;
         int ans1=INT_MAX;
         int ans2=INT_MAX;
         while(s<=e){
@@ -50,7 +51,7 @@ public:
                 s=m+1;
             }
         }
-        int st=mid_finder(mountainArr);
+        int st=peak;
         int ed=mountainArr.length()-1;
         while(st<=ed){
             int m=st+((ed-st)/2);
