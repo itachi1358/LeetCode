@@ -1,9 +1,8 @@
 class Solution {
 public:
     bool possible(int i,int j,int k,int threshold,vector<vector<int>> &pref){
-        if(i-k<0 || j-k<0) return false;
+        if(i<k || j<k) return false;
 
-        int x=pref[i][j]-pref[i-k][j-k];
         int current_sum = pref[i][j] - pref[i-k][j] - pref[i][j-k] + pref[i-k][j-k];
         return current_sum<=threshold;
     }
@@ -19,8 +18,8 @@ public:
             }
         }
 
-        for(int i=0;i<n;i++){
-            for(int j=0;j<m;j++){
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=m;j++){
                 int l=0,r=min(n,m);
                 while(l<=r){
                     int mid=l+((r-l)/2);
